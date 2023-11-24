@@ -17,10 +17,7 @@
                     Адрес обращения
                 </th>
                 <th>
-                    Телефон указанный в обращении
-                </th>
-                <th>
-                    Email отправки
+                    Ведомства для отправки
                 </th>
             </tr>
         </thead>
@@ -44,10 +41,7 @@
                     <input type="text">
                 </th>
                 <th>
-                    <input type="tel">
-                </th>
-                <th>
-                    <input type="email">
+                    <input type="text">
                 </th>
             </tr>
         </tbody>
