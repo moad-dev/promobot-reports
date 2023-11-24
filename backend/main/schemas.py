@@ -20,5 +20,5 @@ class RuleGet(BaseModel):
     uuid: str
     group: str | None = None
     topic: str | None = None
-    address: Address | None = None
+    address: AddressSchema | None = None
     agency: str | None = None
