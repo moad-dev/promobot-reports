@@ -31,4 +31,5 @@ COPY --from=backend-builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 COPY backend/ ./
 
+CMD python3 backend/database/init_db.py
 CMD uvicorn main:app --host 0.0.0.0 --port 80 --log-level warning
