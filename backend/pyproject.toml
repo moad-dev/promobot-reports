@@ -15,6 +15,7 @@ pydantic-settings = "^2.1.0"
 python-Levenshtein = "^0.23.0"
 torch = {version = "^2.1.1+cpu", source = "torch_cpu"}
 transformers = "^4.35.2"
+fuzzywuzzy = "^0.18.0"
 
 [[tool.poetry.source]]
 name = "torch_cpu"
