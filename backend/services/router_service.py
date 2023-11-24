@@ -7,6 +7,8 @@ from ..domain.address_query import AddressQuery
 
 from ..ner.extract_address import extract_address_query
 
+import uuid
+
 class RouterService:
     def __init__(
         self, 
@@ -31,7 +33,7 @@ class RouterService:
 
         router.rules.append(
             Rule(
-                uuid=rule['uuid'],
+                uuid=uuid.uuid4().hex,
                 group=rule['group'],
                 topic=rule['topic'],
                 address_query=AddressQuery(
