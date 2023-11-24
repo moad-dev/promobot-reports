@@ -1,7 +1,7 @@
 from ..repositories.processed_message_repository import ProcessedMessageRepository
 from ..domain.processed_message import ProcessedMessage
 
-class ProcessedMessaagesServoce:
+class ProcessedMessaagesService:
     def __init__(
         self,
         processed_message_repository: ProcessedMessageRepository,
