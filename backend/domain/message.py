@@ -6,4 +6,4 @@ class Message:
         self.text = text
 
     def process() -> ProcessedMessage:
-        pass
+        return ProcessedMessage()
