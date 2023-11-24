@@ -16,41 +16,50 @@ class Address:
         self.street = street
         self.building = building
     
-    def match(self, address: AddressQuery) -> bool:
-        if all([self.region, address.region]) and fuzz.token_sort_ratio(self.region, address.region) < 80:
+    def match(self, query: AddressQuery) -> bool:
+        if not query.region:
+            return True
+        
+        if not self.region:
             return False
 
-        if (
-            all([self.area, address.area]) and max(
-                fuzz.token_sort_ratio(area, address.area)
-                for area in self.area
-            ) < 80
-        ):
+        if fuzz.token_sort_ratio(query.region, self.region) < 80:
             return False
 
-        if (
-            all([self.settlement, address.settlement]) and max(
-                fuzz.token_sort_ratio(settlement, address.settlement)
-                for settlement in self.settlement
-            ) < 80
-        ):
+        if not query.area:
+            return True
+
+        if not self.area:
             return False
 
-        if (
-            all([self.street, address.street]) and max(
-                fuzz.token_sort_ratio(street, address.street)
-                for street in self.street
-            ) < 80
-        ):
+        if not any(fuzz.token_sort_ratio(query.area, area) > 80 for area in self.area):
             return False
 
-        if (
-            all([self.building, address.building]) and max(
-                fuzz.token_sort_ratio(building, address.building)
-                for building in self.building
-            ) < 80
-        ):
+        if not query.settlement:
+            return True
+
+        if not self.settlement:
+            return False
+
+        if not any(fuzz.token_sort_ratio(query.settlement, settlement) > 80 for settlement in self.settlement):
+            return False
+
+        if not query.street:
+            return True
+
+        if not self.street:
+            return False
+
+        if not any(fuzz.token_sort_ratio(query.street, street) > 80 for street in self.street):
+            return False
+
+        if not query.building:
+            return True
+
+        if not self.building:
+            return False
+
+        if not any(fuzz.token_sort_ratio(query.building, building) > 80 for building in self.building):
             return False
 
         return True
-
