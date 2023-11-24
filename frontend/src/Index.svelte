@@ -7,6 +7,9 @@
     <textarea placeholder="Введите текст обращения..."></textarea>
     <div class="buttons">
         <button>Обработать</button>
+        <a href="/results">
+            <button>Результаты</button>
+        </a>
         <a href="/settings">
             <button>Настройки</button>
         </a>
@@ -18,7 +21,7 @@
         justify-self: center;
         display: flex;
         margin-top: 20px;
-        & > button + a {
+        & > a {
             margin-left: 12px;
         }
     }
