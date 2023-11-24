@@ -1,7 +1,7 @@
-from ..classification.predict_group_topic import PredictGroupTopic
-from ..ner.extract_address import extract_addresses
-from address import Address
-from processed_message import ProcessedMessage
+from main.classification.predict_group_topic import PredictGroupTopic
+from main.ner.extract_address import extract_addresses
+from main.domain.address import Address
+from main.domain.processed_message import ProcessedMessage
 import uuid
 
 predict_group_topic = PredictGroupTopic()

@@ -1,6 +1,11 @@
 venv
+.env
+.env.production
 data
 .idea
 backend/.env
-backend/database/database.sqlite
-__pycache__
+
+**/__pycache__/
+**/*.pyc
+
+backend/dbstorage

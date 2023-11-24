@@ -1,6 +1,6 @@
-from backend.domain.address_query import AddressQuery
-from ..domain.rule import Rule
-from ..domain.router import Router
+from main.domain.address_query import AddressQuery
+from main.domain.rule import Rule
+from main.domain.router import Router
 import json
 
 import aiosqlite

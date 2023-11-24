@@ -1,6 +1,6 @@
-from rule import Rule
-from message import Message
-from processed_message import ProcessedMessage
+from main.domain.rule import Rule
+from main.domain.message import Message
+from main.domain.processed_message import ProcessedMessage
 
 
 class Router:

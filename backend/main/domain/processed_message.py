@@ -1,4 +1,4 @@
-from address import Address
+from main.domain.address import Address
 
 class ProcessedMessage:
     def __init__(

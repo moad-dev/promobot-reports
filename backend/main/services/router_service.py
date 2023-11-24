@@ -48,4 +48,9 @@ class RouterService:
         )
 
         await self.router_repository.save(router)
-    
+   
+
+    async def get_rules(self):
+        router = await self.router_repository.get()
+
+        return router.rules
