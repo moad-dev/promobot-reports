@@ -13,3 +13,5 @@ class Router:
         for rule in self.rules:
             if rule.match(processed):
                 processed.mark_as_sended(rule.agency)
+
+        return processed
