@@ -10,6 +10,7 @@ class Message:
     def process(self) -> ProcessedMessage:
         return ProcessedMessage(
             uuid=uuid.uuid4().hex,
+            text=self.text,
             group='foo',
             topic='bar',
             addresses=[
