@@ -12,5 +12,6 @@ class ProcessedMessage:
         self.addresses = addresses
         self.agencies = agencies
 
+
     def mark_as_sended(self, agency: str):
         self.agencies.append(agency)
