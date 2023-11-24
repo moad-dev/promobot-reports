@@ -30,6 +30,7 @@ class ProcessedMessageRepository:
                 processed_messages.append(
                     ProcessedMessage(
                         uuid=row['uuid'],
+                        text=row['text'],
                         group=row['group'],
                         topic=row['topic'],
                         addresses=addresses,
@@ -42,9 +43,10 @@ class ProcessedMessageRepository:
 
     async def save(self, processed_message: ProcessedMessage):
         await self.connection.execute(
-            'insert into processed_messages values (?, ?, ?, ?, ?)',
+            'insert into processed_messages values (?, ?, ?, ?, ?, ?)',
             (
                 processed_message.uuid,
+                processed_message.text,
                 processed_message.group,
                 processed_message.topic,
                 json.dumps([

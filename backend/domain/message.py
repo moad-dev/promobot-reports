@@ -14,6 +14,7 @@ class Message:
         group, topic = predict_group_topic.predict(self.text)
         return ProcessedMessage(
             uuid=uuid.uuid4().hex,
+            text=self.text,
             group=group,
             topic=topic,
             addresses=[
