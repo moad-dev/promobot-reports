@@ -3,3 +3,4 @@ data
 .idea
 backend/.env
 backend/database/database.sqlite
+__pycache__
