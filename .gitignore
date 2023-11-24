@@ -9,3 +9,4 @@ backend/.env
 **/*.pyc
 
 backend/dbstorage
+backend/ai_models
