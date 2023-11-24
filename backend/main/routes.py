@@ -1,7 +1,11 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends
-from main.dependencies import get_router_service
-from main.dependencies import get_processed_messages_service
+from main.dependencies import (
+    get_router_service,
+    get_processed_messages_service,
+    get_unit_of_work
+)
+
 from main.services.router_service import RouterService
 from main.services.processed_messages_service import ProcessedMessagesService
 from main.schemas import RuleCreation, RuleGet, MessagePost
@@ -18,9 +22,11 @@ async def get_all_rules(
 @router.post("/api/rules")
 async def add_rule(
     rule_data: RuleCreation, 
-    router_service: Annotated[RouterService, Depends(get_router_service)]
+    router_service: Annotated[RouterService, Depends(get_router_service)],
+    uow=Depends(get_unit_of_work)
 ):
-    await router_service.add_rule(rule_data)
+    async with uow: # should be in service layer
+        await router_service.add_rule(rule_data)
 
 
 @router.get("/api/processed-messages")
@@ -36,7 +42,9 @@ async def get_all_processed_messages(
 @router.post("/api/messages")
 async def add_processed_message(
     message_data: MessagePost,
-    router_service: Annotated[RouterService, Depends(get_router_service)]
+    router_service: Annotated[RouterService, Depends(get_router_service)],
+    uow=Depends(get_unit_of_work)
 ):
-    await router_service.route(message_data)
+    async with uow: # should be in service layer
+        await router_service.route(message_data)
     

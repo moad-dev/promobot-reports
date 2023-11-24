@@ -7,6 +7,7 @@ from main.services.processed_messages_service import ProcessedMessagesService
 from main.services.router_service import RouterService
 from main.repositories.processed_message_repository import ProcessedMessageRepository
 from main.repositories.router_repository import RouterRepository
+from main.repositories.unit_of_work import UnitOfWork
 
 
 async def get_db():
@@ -15,6 +16,11 @@ async def get_db():
         yield db
     finally:
         await db.close()
+
+async def get_unit_of_work(
+    db: Annotated[aiosqlite.Connection, Depends(get_db)]
+) -> UnitOfWork:
+    return UnitOfWork(db)
 
 async def get_processed_messages_repository(
     db: Annotated[aiosqlite.Connection, Depends(get_db)]
