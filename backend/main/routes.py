@@ -62,6 +62,6 @@ async def get_router_service(
 
 
 @router.get("/")
-async def root(router_service = Annotated[RouterService, Depends(get_router_service)]):
+async def root(router_service: Annotated[RouterService, Depends(get_router_service)]):
     rules = await router_service.get_rules()
     return {"message": rules }
