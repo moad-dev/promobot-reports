@@ -5,6 +5,7 @@ from main.domain.processed_message import ProcessedMessage
 from main.settings import settings
 import uuid
 
+# poor man dependency injection
 if settings.dummy_model:
     from main.classification.dummy_predict_group_topic import DummyPredictGroupTopic
     predict_group_topic = DummyPredictGroupTopic()
