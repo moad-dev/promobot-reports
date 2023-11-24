@@ -2,7 +2,7 @@ from main.domain.address import Address
 
 class ProcessedMessage:
     def __init__(
-            self, uuid: str, text: str, group: str, topic: str, addresses: list[Address],
+            self, uuid: str, text: str, group: str | None, topic: str | None, addresses: list[Address],
             agencies: list[str] = []
         ):
         self.uuid = uuid

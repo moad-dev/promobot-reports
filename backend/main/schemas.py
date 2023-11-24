@@ -15,6 +15,12 @@ class AddressSchema(BaseModel):
     street: str | None = None
     building: str | None = None
 
+class FuzzyAddressSchema(BaseModel):
+    region: str | None = None
+    area: list[str] = []
+    settlement: list[str] = []
+    street: list[str] = []
+    buidling: list[str] = []
 
 class RuleGet(BaseModel):
     uuid: str
@@ -29,4 +35,8 @@ class MessagePost(BaseModel):
 
 class ProcessedMessageGet(BaseModel):
     uuid: str
-    
+    text: str
+    group: str | None = None
+    topic: str | None = None
+    address: list[FuzzyAddressSchema] = []
+    agency: list[str]
