@@ -4,14 +4,14 @@ from main.dependencies import get_router_service
 from main.dependencies import get_processed_messages_service
 from main.services.router_service import RouterService
 from main.services.processed_messages_service import ProcessedMessagesService
-from main.schemas import RuleCreation
+from main.schemas import RuleCreation, RuleGet
 
 router = APIRouter()
 
 @router.get("/api/rules")
 async def get_all_rules(
     router_service: Annotated[RouterService, Depends(get_router_service)]
-) -> list[RuleCreation]:
+) -> list[RuleGet]:
     rules = await router_service.get_rules()
     return rules
 
