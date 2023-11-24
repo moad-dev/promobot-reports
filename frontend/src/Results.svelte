@@ -1,7 +1,13 @@
-<script></script>
+<script>
+     let withoutThrashed = false;
+</script>
 
 <div style="display: grid; justify-content: center">
     <h1>Результаты обработки</h1>
+    <div style="justify-self: end; margin-bottom: 4px">
+        <label for="filter">Оставить только обращения</label>
+        <input type="checkbox" bind:checked={withoutThrashed} id="filter" name="filter">
+    </div>
     <table>
         <thead>
         <tr>
@@ -21,7 +27,7 @@
                 Ведомства для отправки
             </th>
             <th>
-                Мусор
+                <p>Мусор</p>
             </th>
         </tr>
         </thead>

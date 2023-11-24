@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from settings import settings
+from routes import router
 
 app = FastAPI()
 
@@ -16,6 +17,4 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.get("/")
-def read_root():
-    return {"hello": "World"}
+app.include_router(router)

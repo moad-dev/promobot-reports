@@ -1,13 +1,16 @@
-from aiosqlite import Connection, Row
+import aiosqlite
 from ..domain.processed_message import ProcessedMessage
 from ..domain.address import Address
 
 import json
 
 class ProcessedMessageRepository:
-    async def get(self, conn: Connection) -> list[ProcessedMessage]:
-        conn.row_factory = Row
-        async with conn.execute('SELECT * FROM processed_messages') as cursor:
+    def __init__(self, connection: aiosqlite.Connection):
+        self.connection = connection
+
+    async def get(self) -> list[ProcessedMessage]:
+        self.connection.row_factory = aiosqlite.Row
+        async with self.connection.execute('select * from processed_messages') as cursor:
             processed_messages: list[ProcessedMessage] = []
             async for row in cursor:
                 addresses = json.loads(row['addresses']) 
@@ -27,6 +30,7 @@ class ProcessedMessageRepository:
                 processed_messages.append(
                     ProcessedMessage(
                         uuid=row['uuid'],
+                        text=row['text'],
                         group=row['group'],
                         topic=row['topic'],
                         addresses=addresses,
@@ -37,11 +41,12 @@ class ProcessedMessageRepository:
             return processed_messages
 
 
-    async def save(self, conn: Connection, processed_message: ProcessedMessage):
-        await conn.execute(
-            'INSERT INTO processed_messages VALUES (?, ?, ?, ?, ?)',
+    async def save(self, processed_message: ProcessedMessage):
+        await self.connection.execute(
+            'insert into processed_messages values (?, ?, ?, ?, ?, ?)',
             (
                 processed_message.uuid,
+                processed_message.text,
                 processed_message.group,
                 processed_message.topic,
                 json.dumps([
