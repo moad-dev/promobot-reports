@@ -2,7 +2,8 @@ from address_query import AddressQuery
 from processed_message import ProcessedMessage
 
 class Rule:
-    def __init__(self, group: str, topic: str, address_query: AddressQuery, phone: str, agency: str):
+    def __init__(self, uuid: str, group: str, topic: str, address_query: AddressQuery, agency: str):
+        self.uuid = uuid
         self.group = group
         self.topic = topic
         self.address_query = address_query
