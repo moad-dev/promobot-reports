@@ -11,7 +11,7 @@ class RouterRepository:
     
     async def get(self) -> Router:
         self.connection.row_factory = aiosqlite.Row
-        async with self.connection.execute('SELECT * FROM rules') as cursor:
+        async with self.connection.execute('select * from rules') as cursor:
             rules: list[Rule] = []
             async for row in cursor:
                 address_query = json.loads(row['address_query'])
@@ -37,10 +37,10 @@ class RouterRepository:
             return Router(rules=rules)
         
     async def save(self, router: Router):
-        await self.connection.execute('DELETE FROM rules')
+        await self.connection.execute('delete from rules')
 
         await self.connection.executemany(
-            'INSERT INTO rules VALUES (?, ?, ?, ?, ?)',
+            'insert into rules values (?, ?, ?, ?, ?)',
             [
                 (
                     rule.uuid,

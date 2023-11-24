@@ -10,7 +10,7 @@ class ProcessedMessageRepository:
 
     async def get(self) -> list[ProcessedMessage]:
         self.connection.row_factory = aiosqlite.Row
-        async with self.connection.execute('SELECT * FROM processed_messages') as cursor:
+        async with self.connection.execute('select * from processed_messages') as cursor:
             processed_messages: list[ProcessedMessage] = []
             async for row in cursor:
                 addresses = json.loads(row['addresses']) 
@@ -42,7 +42,7 @@ class ProcessedMessageRepository:
 
     async def save(self, processed_message: ProcessedMessage):
         await self.connection.execute(
-            'INSERT INTO processed_messages VALUES (?, ?, ?, ?, ?)',
+            'insert into processed_messages values (?, ?, ?, ?, ?)',
             (
                 processed_message.uuid,
                 processed_message.group,

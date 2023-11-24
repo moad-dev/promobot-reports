@@ -7,6 +7,8 @@ from ..domain.address_query import AddressQuery
 
 from ..ner.extract_address import extract_address_query
 
+import uuid
+
 class RouterService:
     def __init__(
         self, 
@@ -16,10 +18,10 @@ class RouterService:
         self.router_repository = router_repository
         self.processed_message_repository = processed_message_repository
 
-    async def route(self, message: Message):
+    async def route(self, message_text: str):
         router = await self.router_repository.get()
 
-        processed_message: ProcessedMessage = router.route(message)
+        processed_message: ProcessedMessage = router.route(Message(message_text))
 
         await self.processed_message_repository.save(processed_message)
 
@@ -31,7 +33,7 @@ class RouterService:
 
         router.rules.append(
             Rule(
-                uuid=rule['uuid'],
+                uuid=uuid.uuid4().hex,
                 group=rule['group'],
                 topic=rule['topic'],
                 address_query=AddressQuery(
