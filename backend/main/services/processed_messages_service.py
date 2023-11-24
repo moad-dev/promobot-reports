@@ -1,6 +1,5 @@
 from main.repositories.processed_message_repository import ProcessedMessageRepository
-from main.domain.processed_message import ProcessedMessage, FuzzyAddressSchema
-from main.schemas import ProcessedMessageGet
+from main.schemas import ProcessedMessageGet,  FuzzyAddressSchema
 
 class ProcessedMessagesService:
     def __init__(
@@ -9,6 +8,32 @@ class ProcessedMessagesService:
 
     ):
         self.processed_message_repository = processed_message_repository
+    
+    async def get_processed_message(self, uuid: str) -> ProcessedMessageGet:
+        model = await self.processed_message_repository.get_by_id(uuid)
+        addresses = []
+        for address in model.addresses:
+            addresses.append(
+                FuzzyAddressSchema(
+                    region=address.region,
+                    area=address.area,
+                    settlement=address.settlement,
+                    street=address.street,
+                    building=address.building
+                )
+            )
+
+        return ProcessedMessageGet(
+            uuid=model.uuid,
+            text=model.text,
+            group=model.group,
+            topic=model.topic,
+            address=addresses,
+            agency=model.agencies
+        )
+
+
+            
 
     async def get_processed_messages(self) -> list[ProcessedMessageGet]:
         models = await self.processed_message_repository.get()

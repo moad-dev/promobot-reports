@@ -20,7 +20,7 @@ class FuzzyAddressSchema(BaseModel):
     area: list[str] = []
     settlement: list[str] = []
     street: list[str] = []
-    buidling: list[str] = []
+    building: list[str] = []
 
 class RuleGet(BaseModel):
     uuid: str

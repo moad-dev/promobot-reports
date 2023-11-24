@@ -1,5 +1,5 @@
 from typing import Annotated
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 from main.dependencies import (
     get_router_service,
     get_processed_messages_service,
@@ -19,7 +19,8 @@ async def get_all_rules(
     rules = await router_service.get_rules()
     return rules
 
-@router.post("/api/rules")
+
+@router.post("/api/rules", status_code=status.HTTP_201_CREATED)
 async def add_rule(
     rule_data: RuleCreation, 
     router_service: Annotated[RouterService, Depends(get_router_service)],
@@ -38,8 +39,19 @@ async def get_all_processed_messages(
     processed_messages = await processed_messages_service.get_processed_messages()
     return processed_messages
 
+@router.get("/api/processed_messages/{uuid}")
+async def get_processed_message_by_uuid(
+    uuid: str,
+    processed_messages_service: Annotated[
+        ProcessedMessagesService, Depends(get_processed_messages_service)
+    ]
+):
+    processed_message = await processed_messages_service.get_processed_message(uuid)
+    
+    return processed_message
 
-@router.post("/api/messages")
+
+@router.post("/api/messages", status_code=status.HTTP_201_CREATED)
 async def add_processed_message(
     message_data: MessagePost,
     router_service: Annotated[RouterService, Depends(get_router_service)],
