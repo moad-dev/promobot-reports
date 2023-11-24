@@ -1,5 +1,5 @@
 from fuzzywuzzy import fuzz
-from address_query import AddressQuery
+from main.domain.address_query import AddressQuery
 
 class Address:
     def __init__(

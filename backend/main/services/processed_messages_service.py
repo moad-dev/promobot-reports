@@ -1,5 +1,5 @@
-from ..repositories.processed_message_repository import ProcessedMessageRepository
-from ..domain.processed_message import ProcessedMessage
+from main.repositories.processed_message_repository import ProcessedMessageRepository
+from main.domain.processed_message import ProcessedMessage
 
 class ProcessedMessagesService:
     def __init__(

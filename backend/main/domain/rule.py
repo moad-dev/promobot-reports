@@ -1,5 +1,5 @@
-from address_query import AddressQuery
-from processed_message import ProcessedMessage
+from main.domain.address_query import AddressQuery
+from main.domain.processed_message import ProcessedMessage
 
 class Rule:
     def __init__(self, uuid: str, group: str, topic: str, address_query: AddressQuery, agency: str):

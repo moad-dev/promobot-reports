@@ -1,6 +1,6 @@
-from ..ner.extract_address import extract_addresses
-from address import Address
-from processed_message import ProcessedMessage
+from main.ner.extract_address import extract_addresses
+from main.domain.address import Address
+from main.domain.processed_message import ProcessedMessage
 import uuid
 
 class Message:

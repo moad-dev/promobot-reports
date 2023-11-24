@@ -1,6 +1,6 @@
 import aiosqlite
-from ..domain.processed_message import ProcessedMessage
-from ..domain.address import Address
+from main.domain.processed_message import ProcessedMessage
+from main.domain.address import Address
 
 import json
 

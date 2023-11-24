@@ -2,21 +2,21 @@
 -- used for quick bootstraping during early development stage
 -- consider to use migrations instead in the future
 
--- this is sqlite syntax
+PRAGMA journal_mode=WAL;
 
 create table if not exists rules (
     uuid text primary key,
-    group text,
+    `group` text,
     topic text,
     addresses text,
     agencies text
-)
+);
 
 create table if not exists processed_messages (
     uuid text primary key,
     text text,
-    group text,
+    `group` text,
     topic text,
     addresses text,
     agencies text
-)
+);
