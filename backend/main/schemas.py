@@ -22,3 +22,11 @@ class RuleGet(BaseModel):
     topic: str | None = None
     address: AddressSchema | None = None
     agency: str | None = None
+
+
+class MessagePost(BaseModel):
+    text: str
+
+class ProcessedMessageGet(BaseModel):
+    uuid: str
+    

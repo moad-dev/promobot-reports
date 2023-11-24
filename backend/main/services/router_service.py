@@ -4,9 +4,12 @@ from main.domain.message import Message
 from main.domain.processed_message import ProcessedMessage
 from main.domain.rule import Rule
 from main.domain.address_query import AddressQuery
-
-from main.schemas import RuleCreation, RuleGet, AddressSchema
-
+from main.schemas import (
+    RuleCreation,
+    RuleGet, 
+    AddressSchema,
+    MessagePost
+)
 from main.ner.extract_address import extract_address_query
 
 import uuid
@@ -22,10 +25,10 @@ class RouterService:
         self.router_repository = router_repository
         self.processed_message_repository = processed_message_repository
 
-    async def route(self, message_text: str):
+    async def route(self, message_post: MessagePost):
         router = await self.router_repository.get()
 
-        processed_message: ProcessedMessage = router.route(Message(message_text))
+        processed_message: ProcessedMessage = router.route(Message(message_post.text))
 
         await self.processed_message_repository.save(processed_message)
 
