@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+    app:
+        image: promobot-backend
+        container_name: promobot-backend
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: docker/backend/Dockerfile-backend
+        volumes:
+            - db-storage:/app/dbstorage
+        env_file:
+            - .env.production
+        ports:
+            - ${API_PORT}:80
+        networks:
+            - backend-conn
+
+    nginx:
+        image: promobot-frontend
+        container_name: promobot-frontend
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: docker/frontend/Dockerfile-frontend
+        env_file:
+            - .env.production
+        ports:
+            - ${FRONTEND_PORT}:80
+        networks:
+            - backend-conn
+
+volumes:
+    db-storage:
+
+networks:
+    backend-conn:
+        driver: bridge
