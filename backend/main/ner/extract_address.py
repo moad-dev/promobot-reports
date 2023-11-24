@@ -71,6 +71,9 @@ def extract_addresses(text: str) -> list[dict]:
 def extract_address_query(text: str) -> dict:
     match = addr_extractor.find(text)
 
+    if match is None:
+        return {}
+
     return {
         types_reverse[fact.type]: ' '.join([fact.type, fact.value])
         for fact in match.fact
