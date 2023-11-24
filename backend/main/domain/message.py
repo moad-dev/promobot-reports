@@ -27,11 +27,11 @@ class Message:
             topic=topic,
             addresses=[
                 Address(
-                    region=a['region'],
-                    area=a['area'],
-                    settlement=a['settlement'],
-                    street=a['street'],
-                    building=a['building']
+                    region=a.get('region'),
+                    area=a.get('area', []),
+                    settlement=a.get('settlement', []),
+                    street=a.get('street', []),
+                    building=a.get('building', [])
                 ) 
                 for a in extract_addresses(self.text)
             ]
