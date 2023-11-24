@@ -61,7 +61,9 @@ async def get_router_service(
     return RouterService(router_repository, processed_messages_repository)
 
 
-@router.get("/")
+@router.get("/api/rules")
 async def root(router_service: Annotated[RouterService, Depends(get_router_service)]):
     rules = await router_service.get_rules()
-    return {"message": rules }
+    return rules
+
+
