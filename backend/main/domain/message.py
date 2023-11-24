@@ -2,9 +2,16 @@ from main.classification.predict_group_topic import PredictGroupTopic
 from main.ner.extract_address import extract_addresses
 from main.domain.address import Address
 from main.domain.processed_message import ProcessedMessage
+from main.settings import settings
 import uuid
 
-predict_group_topic = PredictGroupTopic()
+if settings.dummy_model:
+    from main.classification.dummy_predict_group_topic import DummyPredictGroupTopic
+    predict_group_topic = DummyPredictGroupTopic()
+else:
+    from main.classification.predict_group_topic import PredictGroupTopic
+    predict_group_topic = PredictGroupTopic()
+
 
 class Message:
     def __init__(self, text: str):
@@ -28,3 +35,4 @@ class Message:
                 for a in extract_addresses(self.text)
             ]
         )
+        

@@ -1,4 +1,3 @@
-from typing import Tuple
 from transformers import pipeline
 
 
@@ -25,7 +24,7 @@ class PredictGroupTopic:
                   'Образование': self.model_education,
                   'Дороги': self.model_roads}
 
-    def predict(self, input) -> Tuple[str, str]:
+    def predict(self, input) -> tuple[str, str]:
         group = self.model_group(input, truncation=True)[0]
         group_label = group['label']
         if group_label not in self.models.keys():
