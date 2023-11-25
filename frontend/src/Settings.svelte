@@ -6,13 +6,13 @@
         address: '',
         agency: '',
     };
-    let rules = fetch(API_URL+'/api/rules').then(response => response.json());
-    let groups_json = fetch(API_URL+'/groups').then(response => response.json());
+    let rules = fetch(import.meta.env.VITE_API_URL+'/api/rules').then(response => response.json());
+    let groups_json = fetch(import.meta.env.VITE_API_URL+'/groups').then(response => response.json());
     async function deleteRule(rule) {
-        let rules = fetch(API_URL + '/api/rules').then(response => response.json());
+        let rules = fetch(import.meta.env.VITE_API_URL + '/api/rules').then(response => response.json());
         let rules_list = await rules.then(result => result);
         console.log(rules_list.slice(-1)[0]["uuid"]);
-        fetch(API_URL + '/api/rules/' + rules_list.slice(-1)[0]["uuid"], {
+        fetch(import.meta.env.VITE_API_URL + '/api/rules/' + rules_list.slice(-1)[0]["uuid"], {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -101,7 +101,7 @@
     <div style="margin-top: 20px">
         <a href="/">
             <button style="background: rgb(22,133,0)" on:click={() => {
-                fetch(API_URL+'/api/rules', {
+                fetch(import.meta.env.VITE_API_URL+'/api/rules', {
                     method:  'POST',
                     headers: {
                       'Content-Type': 'application/json'
