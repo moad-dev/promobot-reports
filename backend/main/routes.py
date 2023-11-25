@@ -1,11 +1,11 @@
 from typing import Annotated
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Response, status
 from main.dependencies import (
     get_router_service,
     get_processed_messages_service,
-    get_unit_of_work
+    get_unit_of_work,
+    get_groups_from_file
 )
-from main.domain.processed_message import ProcessedMessage
 
 from main.services.router_service import RouterService
 from main.services.processed_messages_service import ProcessedMessagesService
@@ -71,4 +71,10 @@ async def add_processed_message(
     async with uow: # should be in service layer
         uuid = await router_service.route(message_data)
     
-    return uuid 
+    return uuid
+
+@router.get("/groups")
+async def get_groups(
+    groups: Annotated[str, Depends(get_groups_from_file)]
+):
+    return Response(groups, media_type="application/json")

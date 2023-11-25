@@ -38,10 +38,10 @@
                     {#if !withoutThrashed}
                         <tr>
                             <th>
-                                <button on:click={() => {document.getElementById("modal").showModal()}} style="background: none; border: none; color: #535bf2">Показать текст</button>
-                                <dialog id="modal">
+                                <button on:click={() => {document.getElementById("modal" + report['uuid']).showModal()}} style="background: none; border: none; color: #535bf2">Показать текст</button>
+                                <dialog id="modal-{report['uuid']}">
                                     <p>{report["text"]}</p>
-                                    <button on:click={() => {document.getElementById("modal").close()}}>Закрыть</button>
+                                    <button on:click={() => {document.getElementById("modal-" + report['uuid']).close()}}>Закрыть</button>
                                 </dialog>
                             </th>
                             <th>
@@ -51,7 +51,13 @@
                                 {report["topic"]}
                             </th>
                             <th>
-                                {report["address"]}
+                                {
+                                    report["address"]["region"]
+                                    + report["address"]["area"].join(", ")
+                                    + report["address"]["settlement"].join(", ")
+                                    + report["address"]["street"].join(", ")
+                                    + report["address"]["building"].join(", ")
+                                }
                             </th>
                             <th>
                                 {report["agency"]}
