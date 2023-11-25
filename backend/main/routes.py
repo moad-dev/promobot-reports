@@ -38,7 +38,8 @@ async def delete_rule(
     uow=Depends(get_unit_of_work)
 ):
     async with uow:
-        pass
+        await router_service.delete_rule(uuid)
+
 
 @router.get("/api/processed-messages")
 async def get_all_processed_messages(

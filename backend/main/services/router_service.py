@@ -62,6 +62,17 @@ class RouterService:
 
         await self.router_repository.save(router)
    
+    
+    async def delete_rule(self, rule_uuid: str):
+        router = await self.router_repository.get()
+
+        for rule in router.rules:
+            if rule.uuid == rule_uuid:
+                router.rules.remove(rule)
+                break
+
+        await self.router_repository.save(router)
+    
 
     async def get_rules(self) -> list[RuleGet]:
         router = await self.router_repository.get()
