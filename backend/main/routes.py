@@ -28,9 +28,9 @@ async def add_rule(
     uow=Depends(get_unit_of_work)
 ):
     async with uow: # should be in service layer
-        await router_service.add_rule(rule_data)
+        uuid = await router_service.add_rule(rule_data)
     
-    return {"uuid": 
+    return { "uuid": uuid }  
 
 
 @router.delete("/api/rules/{uuid}", status_code=status.HTTP_204_NO_CONTENT)
