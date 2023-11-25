@@ -50,15 +50,16 @@ class RouterService:
         else:
             address_query = None
 
-        new_rule = Rule(
-            uuid=uuid.uuid4().hex,
-            group=rule.group,
-            topic=rule.topic,
-            address_query=address_query,
-            agency=rule.agency
+        router.rules.append(
+            Rule(
+                uuid=uuid.uuid4().hex,
+                group=rule.group,
+                topic=rule.topic,
+                is_trash=rule.is_trash,
+                address_query=address_query,
+                agency=rule.agency
+            )
         )
-
-        router.rules.append(new_rule)
 
         await self.router_repository.save(router)
    
@@ -72,6 +73,7 @@ class RouterService:
                 uuid=rule.uuid,
                 group=rule.group,
                 topic=rule.topic,
+                is_trash=rule.is_trash,
                 address=AddressSchema(
                     region=rule.address_query.region,
                     area=rule.address_query.area,

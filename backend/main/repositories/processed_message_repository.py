@@ -33,6 +33,7 @@ class ProcessedMessageRepository:
                         text=row['text'],
                         group=row['group'],
                         topic=row['topic'],
+                        is_trash=row['is_trash'],
                         addresses=addresses,
                         agencies=agencies
                     )
@@ -67,6 +68,7 @@ class ProcessedMessageRepository:
                 text=row['text'],
                 group=row['group'],
                 topic=row['topic'],
+                is_trash=row['is_trash'],
                 addresses=addresses,
                 agencies=agencies
             )
@@ -74,12 +76,13 @@ class ProcessedMessageRepository:
 
     async def save(self, processed_message: ProcessedMessage):
         await self.connection.execute(
-            'insert into processed_messages values (?, ?, ?, ?, ?, ?)',
+            'insert into processed_messages values (?, ?, ?, ?, ?, ?, ?)',
             (
                 processed_message.uuid,
                 processed_message.text,
                 processed_message.group,
                 processed_message.topic,
+                processed_message.is_trash,
                 json.dumps([
                     {
                         'region': address.region,

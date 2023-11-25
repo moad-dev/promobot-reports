@@ -14,6 +14,7 @@ MODELS = [
     "nizamovtimur/rubert-tiny-reports-education-classification",
     "nizamovtimur/rubert-tiny-reports-roads-classification",
     "nizamovtimur/rubert-tiny-reports-another-classification",
+    "danil7/rubert-tiny-reports-is-trash-classification",
 ]
 
 for model in MODELS:

@@ -9,9 +9,13 @@ import uuid
 if settings.dummy_model:
     from main.classification.dummy_predict_group_topic import DummyPredictGroupTopic
     predict_group_topic = DummyPredictGroupTopic()
+    from main.classification.dummy_predict_is_trash import DummyPredictIsTrash
+    predict_is_trash = DummyPredictIsTrash()
 else:
     from main.classification.predict_group_topic import PredictGroupTopic
     predict_group_topic = PredictGroupTopic()
+    from main.classification.predict_is_trash import PredictIsTrash
+    predict_is_trash = PredictIsTrash()
 
 
 class Message:
@@ -20,11 +24,13 @@ class Message:
 
     def process(self) -> ProcessedMessage:
         group, topic = predict_group_topic.predict(self.text)
+        is_trash = predict_is_trash.predict(self.text)
         return ProcessedMessage(
             uuid=uuid.uuid4().hex,
             text=self.text,
             group=group,
             topic=topic,
+            is_trash=is_trash,
             addresses=[
                 Address(
                     region=a.get('region'),

@@ -28,6 +28,7 @@ class ProcessedMessagesService:
             text=model.text,
             group=model.group,
             topic=model.topic,
+            is_trash=model.is_trash,
             address=addresses,
             agency=model.agencies
         )
@@ -51,12 +52,14 @@ class ProcessedMessagesService:
                         building=address.building
                     )
                 )
+             
             results.append(
                 ProcessedMessageGet(
                     uuid=item.uuid,
                     text=item.text,
                     group=item.group,
                     topic=item.topic,
+                    is_trash=item.is_trash,
                     address=addresses,
                     agency=item.agencies
                 )

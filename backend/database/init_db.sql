@@ -17,6 +17,7 @@ create table if not exists processed_messages (
     text text,
     `group` text,
     topic text,
+    is_trash bool,
     addresses text,
     agencies text
 );
