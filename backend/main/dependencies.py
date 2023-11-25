@@ -18,7 +18,7 @@ async def get_db():
         await db.close()
 
 def get_groups_from_file():
-    with open("database/groups.json") as file:
+    with open("database/groups.json", encoding="utf-8") as file:
         groups = file.read()
 
     return groups
