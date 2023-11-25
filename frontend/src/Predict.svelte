@@ -11,7 +11,6 @@
 
             for (const [key, value] of Object.entries(addr)) {
                 if (key !== "region" && value.length !== 0) {
-                    console.log(key, value);
                     parts.push(value);
                 }
             }
@@ -50,13 +49,14 @@
         </tr>
         </thead>
         <tbody>
-            {#await response then predict}
+            {#await response}
+            {:then predict}
                 <tr>
                     <th>
                         <button on:click={() => {document.getElementById("modal").showModal()}} style="background: none; border: none; color: #535bf2">Показать текст</button>
                         <dialog id="modal">
                             <p>{localStorage.text}</p>
-                            <button on:click={() => {document.getElementById("modal").close()}}>Закрыть</button>
+                                <button on:click={() => {document.getElementById("modal").close()}}>Закрыть</button>
                         </dialog>
                     </th>
                     <th>
@@ -79,6 +79,8 @@
                         {/if}
                     </th>
                 </tr>
+            {:catch error}
+                <p style="color: red">{error.message}</p>
             {/await}
         </tbody>
     </table>

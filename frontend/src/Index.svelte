@@ -1,13 +1,16 @@
 <script>
+
     let text = '';
+
+    import page from "page";
+
 </script>
 
 <h1>Promobot <span style="color: rgb(187,22,0)">Reports</span></h1>
 <div style="display: grid">
     <textarea bind:value={text} placeholder="Введите текст обращения..."></textarea>
     <div class="buttons">
-        <a href="/predict">
-            <button on:click={() => {localStorage.text = text;
+        <button on:click={() => {localStorage.text = text;
             fetch(import.meta.env.VITE_API_URL+'/api/messages', {
                 method:  'POST',
                 headers: {
@@ -17,9 +20,10 @@
                     JSON.stringify({
                         text: text
                     })
-                }).then(response => response.json()).then(result => localStorage.uuid = result);
-            }}>Обработать</button>
-        </a>
+                }).then(response => response.json()).then(result => { localStorage.uuid = result; page('/predict'); });
+            }}>
+            Обработать
+        </button>
         <a href="/results">
             <button>Результаты</button>
         </a>
@@ -34,7 +38,7 @@
         justify-self: center;
         display: flex;
         margin-top: 20px;
-        & a + a {
+        & * + * {
             margin-left: 12px;
         }
     }

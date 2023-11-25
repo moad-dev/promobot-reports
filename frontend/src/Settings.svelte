@@ -11,7 +11,6 @@
     async function deleteRule(rule) {
         let rules = fetch(import.meta.env.VITE_API_URL + '/api/rules').then(response => response.json());
         let rules_list = await rules.then(result => result);
-        console.log(rules_list.slice(-1)[0]["uuid"]);
         fetch(import.meta.env.VITE_API_URL + '/api/rules/' + rules_list.slice(-1)[0]["uuid"], {
             method: 'DELETE',
             headers: {
@@ -113,8 +112,7 @@
                             address: rule.address,
                             agency: rule.agency,
                         })
-                    }).then(response => response.json())
-                            .then(result => console.log(result));
+                    }).then(response => response.json());
             }}>
                 +
             </button>
