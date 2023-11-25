@@ -53,10 +53,11 @@
                             <th>
                                 {
                                     report["address"]["region"]
-                                    + report["address"]["area"].join(", ")
-                                    + report["address"]["settlement"].join(", ")
-                                    + report["address"]["street"].join(", ")
-                                    + report["address"]["building"].join(", ")
+                                    + (report["address"]["area"] && report["address"]["area"].join(", "))
+                                    + (report["address"]["city"] && report["address"]["city"].join(", "))
+                                    + (report["address"]["street"] && report["address"]["street"].join(", "))
+                                    + (report["address"]["house"] && report["address"]["house"].join(", "))
+                                    || "Не найден"
                                 }
                             </th>
                             <th>
