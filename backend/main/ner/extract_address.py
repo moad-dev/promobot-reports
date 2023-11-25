@@ -79,6 +79,6 @@ def extract_address_query(text: str) -> dict:
 
     return {
         types_reverse[fact.type]: ' '.join([fact.type, fact.value])
-        for fact in match.fact
+        for fact in match.fact.parts
         if fact.type in types_reverse
     }
