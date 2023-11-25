@@ -9,7 +9,7 @@ class ProcessedMessage:
             topic: str | None,
             is_trash: bool | None,
             addresses: list[Address],
-            agencies: list[str] = []
+            agencies: list[str] = None
         ):
         self.uuid = uuid
         self.text = text
@@ -17,7 +17,7 @@ class ProcessedMessage:
         self.topic = topic
         self.is_trash = is_trash
         self.addresses = addresses
-        self.agencies = agencies
+        self.agencies = agencies or []
 
 
     def mark_as_sended(self, agency: str):
