@@ -17,6 +17,13 @@ async def get_db():
     finally:
         await db.close()
 
+def get_groups_from_file():
+    with open("database/groups.json") as file:
+        groups = file.read()
+
+    return groups
+
+
 async def get_unit_of_work(
     db: Annotated[aiosqlite.Connection, Depends(get_db)]
 ) -> UnitOfWork:
@@ -54,3 +61,4 @@ async def get_router_service(
     ]
     ) -> RouterService:
     return RouterService(router_repository, processed_messages_repository)
+
