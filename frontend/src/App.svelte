@@ -5,7 +5,7 @@
     import Settings from "./Settings.svelte";
     import Results from "./Results.svelte";
     import Predict from "./Predict.svelte";
-    // let response = fetch('http://localhost:8000').then(response => response.json());
+    // let response = fetch(API_URL).then(response => response.json());
 </script>
 
 <main>

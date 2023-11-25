@@ -1,6 +1,6 @@
 <script>
     let [group, theme, address, agency] = ["Обработка...","Обработка...","Обработка...","Обработка..."];
-    let response = fetch('http://localhost:8000/api/processed-messages/' + localStorage.uuid).then(response => response.json())
+    let response = fetch(API_URL+'/api/processed-messages/' + localStorage.uuid).then(response => response.json())
 </script>
 
 <div style="display: grid; justify-content: center">

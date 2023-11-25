@@ -1,6 +1,6 @@
 <script>
      let withoutThrashed = false;
-     let reports = fetch('http://localhost:8000/api/processed-messages').then(response => response.json());
+     let reports = fetch(API_URL+'/api/processed-messages').then(response => response.json());
 </script>
 
 <div style="display: grid; justify-content: center">

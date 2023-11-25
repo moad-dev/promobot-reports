@@ -8,7 +8,7 @@
     <div class="buttons">
         <a href="/predict">
             <button on:click={() => {localStorage.text = text;
-            fetch('http://localhost:8000/api/messages', {
+            fetch(API_URL+'/api/messages', {
                 method:  'POST',
                 headers: {
                     'Content-Type': 'application/json'
