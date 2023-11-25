@@ -4,7 +4,7 @@
 
 ## Сборка и запуск проекта
 
-Перед сборкой и запуском необходимо создать `.env.production` в корне, a также `.env` в папках `backend` и `frontend`. Во всех папках есть `.env.docker`.
+Перед сборкой и запуском необходимо создать `.env.production` в корне, a также `.env` в папках `backend` и `frontend`. Во всех этих папках есть `.env.example`.
 
 ```bash
 docker compose --env-file .env.production up -d
