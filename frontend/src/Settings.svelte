@@ -23,19 +23,16 @@
         });
     }
 
-    function addrToString(addrs) {
+    function addrToString(addr) {
         let result = "";
 
-        for (const addr of addrs) {
-            const parts =  [];
+        const parts =  [];
 
-
-            for (const [key, value] of Object.entries(addr)) {
-                parts.push(value);
-            }
-            
-            result += parts.join(", ");
+        for (const [key, value] of Object.entries(addr)) {
+            parts.push(value);
         }
+        
+        result = parts.join(", ");
 
         return result;
     }
