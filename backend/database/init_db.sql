@@ -9,7 +9,7 @@ create table if not exists rules (
     `group` text,
     topic text,
     address text,
-    agencies text
+    agency text
 );
 
 create table if not exists processed_messages (
