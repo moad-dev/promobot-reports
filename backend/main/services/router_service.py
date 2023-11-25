@@ -41,11 +41,11 @@ class RouterService:
         if rule.address:
             address_query = extract_address_query(rule.address)
             address_query = AddressQuery(
-                region=address_query['region'],
-                area=address_query['area'],
-                settlement=address_query['settlement'],
-                street=address_query['street'],
-                building=address_query['building']
+                region=address_query.get('region'),
+                area=address_query.get('area'),
+                settlement=address_query.get('settlement'),
+                street=address_query.get('street'),
+                building=address_query.get('building')
             )
         else:
             address_query = None
@@ -55,7 +55,6 @@ class RouterService:
                 uuid=uuid.uuid4().hex,
                 group=rule.group,
                 topic=rule.topic,
-                is_trash=rule.is_trash,
                 address_query=address_query,
                 agency=rule.agency
             )
