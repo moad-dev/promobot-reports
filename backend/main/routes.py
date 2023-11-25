@@ -9,7 +9,7 @@ from main.domain.processed_message import ProcessedMessage
 
 from main.services.router_service import RouterService
 from main.services.processed_messages_service import ProcessedMessagesService
-from main.schemas import RuleCreation, RuleGet, MessagePost
+from main.schemas import ProcessedMessageGet, RuleCreation, RuleGet, MessagePost
 
 router = APIRouter()
 
@@ -47,7 +47,7 @@ async def get_all_processed_messages(
     processed_messages_service: Annotated[
         ProcessedMessagesService, Depends(get_processed_messages_service)
     ]
-) -> list[ProcessedMessage]:
+) -> list[ProcessedMessageGet]:
     processed_messages = await processed_messages_service.get_processed_messages()
     return processed_messages
 
