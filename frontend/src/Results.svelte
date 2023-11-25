@@ -1,6 +1,6 @@
 <script>
      let withoutThrashed = false;
-     let reports = fetch(API_URL+'/api/processed-messages').then(response => response.json());
+     let reports = fetch(import.meta.env.VITE_API_URL+'/api/processed-messages').then(response => response.json());
 </script>
 
 <div style="display: grid; justify-content: center">

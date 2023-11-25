@@ -8,7 +8,7 @@
     <div class="buttons">
         <a href="/predict">
             <button on:click={() => {localStorage.text = text;
-            fetch(API_URL+'/api/messages', {
+            fetch(import.meta.env.VITE_API_URL+'/api/messages', {
                 method:  'POST',
                 headers: {
                     'Content-Type': 'application/json'
