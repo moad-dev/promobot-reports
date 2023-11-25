@@ -38,5 +38,6 @@ class ProcessedMessageGet(BaseModel):
     text: str
     group: str | None = None
     topic: str | None = None
+    is_trash: bool | None = None
     address: list[FuzzyAddressSchema] = []
     agency: list[str]
