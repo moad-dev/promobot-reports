@@ -5,6 +5,7 @@ from main.dependencies import (
     get_processed_messages_service,
     get_unit_of_work
 )
+from main.domain.processed_message import ProcessedMessage
 
 from main.services.router_service import RouterService
 from main.services.processed_messages_service import ProcessedMessagesService
@@ -28,14 +29,25 @@ async def add_rule(
 ):
     async with uow: # should be in service layer
         await router_service.add_rule(rule_data)
+    
+    return {"uuid": 
 
+
+@router.delete("/api/rules/{uuid}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_rule(
+    uuid: str,
+    router_service: Annotated[RouterService, Depends(get_router_service)],
+    uow=Depends(get_unit_of_work)
+):
+    async with uow:
+        pass
 
 @router.get("/api/processed-messages")
 async def get_all_processed_messages(
     processed_messages_service: Annotated[
         ProcessedMessagesService, Depends(get_processed_messages_service)
     ]
-):
+) -> list[ProcessedMessage]:
     processed_messages = await processed_messages_service.get_processed_messages()
     return processed_messages
 

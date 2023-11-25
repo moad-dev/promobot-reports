@@ -33,7 +33,7 @@ class RouterService:
         await self.processed_message_repository.save(processed_message)
 
 
-    async def add_rule(self, rule: RuleCreation):
+    async def add_rule(self, rule: RuleCreation) -> str:
         router = await self.router_repository.get()
 
         if rule.address:
@@ -48,18 +48,19 @@ class RouterService:
         else:
             address_query = None
 
-
-        router.rules.append(
-            Rule(
-                uuid=uuid.uuid4().hex,
-                group=rule.group,
-                topic=rule.topic,
-                address_query=address_query,
-                agency=rule.agency
-            )
+        new_rule = Rule(
+            uuid=uuid.uuid4().hex,
+            group=rule.group,
+            topic=rule.topic,
+            address_query=address_query,
+            agency=rule.agency
         )
 
+        router.rules.append(new_rule)
+
         await self.router_repository.save(router)
+        
+        return new_rule.uuid
    
 
     async def get_rules(self) -> list[RuleGet]:
