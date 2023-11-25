@@ -1,5 +1,6 @@
 <script>
-    let [group, theme, adress, agency] = ["Обработка...","Обработка...","Обработка...","Обработка..."]
+    let [group, theme, address, agency] = ["Обработка...","Обработка...","Обработка...","Обработка..."];
+    let response = fetch('http://localhost:8000/api/processed-messages/' + localStorage.uuid).then(response => response.json())
 </script>
 
 <div style="display: grid; justify-content: center">
@@ -28,30 +29,36 @@
         </tr>
         </thead>
         <tbody>
-            <tr>
-                <th>
-                    <button on:click={() => {document.getElementById("modal").showModal()}} style="background: none; border: none; color: #535bf2">Показать текст</button>
-                    <dialog id="modal">
-                        <p>{localStorage.text}</p>
-                        <button on:click={() => {document.getElementById("modal").close()}}>Закрыть</button>
-                    </dialog>
-                </th>
-                <th>
-                    <p>{group}</p>
-                </th>
-                <th>
-                    <p>{theme}</p>
-                </th>
-                <th>
-                    <p>{adress}</p>
-                </th>
-                <th>
-                    <p>{agency}</p>
-                </th>
-                <th>
-                    Мусор
-                </th>
-            </tr>
+            {#await response then predict}
+                <tr>
+                    <th>
+                        <button on:click={() => {document.getElementById("modal").showModal()}} style="background: none; border: none; color: #535bf2">Показать текст</button>
+                        <dialog id="modal">
+                            <p>{localStorage.text}</p>
+                            <button on:click={() => {document.getElementById("modal").close()}}>Закрыть</button>
+                        </dialog>
+                    </th>
+                    <th>
+                        <p>{predict["group"]}</p>
+                    </th>
+                    <th>
+                        <p>{predict["topic"]}</p>
+                    </th>
+                    <th>
+                        <p>{predict["address"]}</p>
+                    </th>
+                    <th>
+                        <p>{predict["agency"]}</p>
+                    </th>
+                    <th>
+                        {#if predict["is_trash"] === true}
+                            <p>✔</p>
+                        {:else}
+                            <p>X</p>
+                        {/if}
+                    </th>
+                </tr>
+            {/await}
         </tbody>
     </table>
     <a href="/" style="margin-top: 20px; justify-self: end">
