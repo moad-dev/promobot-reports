@@ -2,18 +2,17 @@ from main.domain.address_query import AddressQuery
 from main.domain.processed_message import ProcessedMessage
 
 class Rule:
-    def __init__(self, uuid: str, group: str | None, topic: str | None, is_trash: bool | None, address_query: AddressQuery | None, agency: str | None):
+    def __init__(self, uuid: str, group: str | None, topic: str | None, address_query: AddressQuery | None, agency: str | None):
         self.uuid = uuid
         self.group = group
         self.topic = topic
-        self.is_trash = is_trash
         self.address_query = address_query
         self.agency = agency
 
 
     def match(self, processed_message: ProcessedMessage) -> bool:
 
-        if is_trash:
+        if processed_message.is_trash:
             return False
 
         if self.group and self.group != processed_message.group:
