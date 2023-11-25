@@ -1,6 +1,25 @@
 <script>
-     let withoutThrashed = false;
-     let reports = fetch(import.meta.env.VITE_API_URL+'/api/processed-messages').then(response => response.json());
+    let withoutThrashed = false;
+    let reports = fetch(import.meta.env.VITE_API_URL+'/api/processed-messages').then(response => response.json());
+    
+    function fuzzyAddrToString(fuzzyAddrs) {
+        let result = "";
+
+        for (const addr of fuzzyAddrs) {
+            const parts = addr['region'] ?? [];
+
+
+            for (const [key, value] of Object.entries(addr)) {
+                if (key !== "region" && value.length !== 0) {
+                    parts.push(value);
+                }
+            }
+            
+            result += parts.join(", ") + ";";
+        }
+
+        return result;
+    }
 </script>
 
 <div style="display: grid; justify-content: center">
@@ -51,7 +70,7 @@
                                 {report["topic"]}
                             </th>
                             <th>
-                                <!-- address -->
+                                {fuzzyAddrToString(report["address"])}
                             </th>
                             <th>
                                 {report["agency"]}

@@ -1,6 +1,27 @@
 <script>
     let [group, theme, address, agency] = ["Обработка...","Обработка...","Обработка...","Обработка..."];
     let response = fetch(import.meta.env.VITE_API_URL+'/api/processed-messages/' + localStorage.uuid).then(response => response.json())
+
+    function fuzzyAddrToString(fuzzyAddrs) {
+        let result = "";
+
+        for (const addr of fuzzyAddrs) {
+            const parts = addr['region'] ?? [];
+
+
+            for (const [key, value] of Object.entries(addr)) {
+                if (key !== "region" && value.length !== 0) {
+                    console.log(key, value);
+                    parts.push(value);
+                }
+            }
+            
+            result += parts.join(", ") + ";";
+        }
+
+        return result;
+    }
+
 </script>
 
 <div style="display: grid; justify-content: center">
@@ -45,9 +66,7 @@
                         <p>{predict["topic"]}</p>
                     </th>
                     <th>
-
-
-
+                        { fuzzyAddrToString(predict["address"]) }
                     </th>
                     <th>
                         <p>{predict["agency"]}</p>
