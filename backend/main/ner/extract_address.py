@@ -3,6 +3,8 @@ from natasha import (
     AddrExtractor
 )
 
+from collections import defaultdict
+
 morph_vocab = MorphVocab()
 addr_extractor = AddrExtractor(morph_vocab)
 
@@ -60,9 +62,10 @@ def extract_addresses(text: str) -> list[dict]:
 
     addresses = []
     for cluster in clusters:
-        addr = {}
+        addr = defaultdict(list)
+
         for match in cluster:
-            addr[types_reverse[match.fact.type]] = ' '.join([match.fact.type, match.fact.value])
+            addr[types_reverse[match.fact.type]].append(' '.join([match.fact.type, match.fact.value]))
         addresses.append(addr)
 
     return addresses
