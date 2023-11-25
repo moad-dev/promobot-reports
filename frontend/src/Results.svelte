@@ -54,7 +54,7 @@
         <tbody>
             {#await reports then reportsList}
                 {#each reportsList as report}
-                    {#if !withoutThrashed}
+                    {#if !withoutThrashed || !report["is_trash"]}
                         <tr>
                             <th>
                                 <button on:click={() => {document.getElementById("modal-" + report['uuid']).showModal()}} style="background: none; border: none; color: #535bf2">Показать текст</button>

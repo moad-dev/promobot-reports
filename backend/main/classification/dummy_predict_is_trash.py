@@ -1,3 +1,5 @@
+import random
+
 class DummyPredictIsTrash:
     def predict(self, _: str) -> str:
-        return False
+        return random.randrange(0, 2)
