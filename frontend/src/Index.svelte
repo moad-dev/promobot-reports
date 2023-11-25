@@ -7,7 +7,18 @@
     <textarea bind:value={text} placeholder="Введите текст обращения..."></textarea>
     <div class="buttons">
         <a href="/predict">
-            <button on:click={() => {localStorage.text = text}}>Обработать</button>
+            <button on:click={() => {localStorage.text = text;
+            fetch('http://localhost:8000/api/messages', {
+                method:  'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:
+                    JSON.stringify({
+                        text: text
+                    })
+                }).then(response => response.json()).then(result => localStorage.uuid = result);
+            }}>Обработать</button>
         </a>
         <a href="/results">
             <button>Результаты</button>

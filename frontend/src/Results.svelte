@@ -1,5 +1,6 @@
 <script>
      let withoutThrashed = false;
+     let reports = fetch('http://localhost:8000/api/processed-messages').then(response => response.json());
 </script>
 
 <div style="display: grid; justify-content: center">
@@ -32,7 +33,40 @@
         </tr>
         </thead>
         <tbody>
-
+            {#await reports then reportsList}
+                {#each reportsList as report}
+                    {#if !withoutThrashed}
+                        <tr>
+                            <th>
+                                <button on:click={() => {document.getElementById("modal").showModal()}} style="background: none; border: none; color: #535bf2">Показать текст</button>
+                                <dialog id="modal">
+                                    <p>{report["text"]}</p>
+                                    <button on:click={() => {document.getElementById("modal").close()}}>Закрыть</button>
+                                </dialog>
+                            </th>
+                            <th>
+                                {report["group"]}
+                            </th>
+                            <th>
+                                {report["topic"]}
+                            </th>
+                            <th>
+                                {report["address"]}
+                            </th>
+                            <th>
+                                {report["agency"]}
+                            </th>
+                            <th>
+                                {#if report["is_trash"] === true}
+                                    <p>✔</p>
+                                {:else}
+                                    <p>X</p>
+                                {/if}
+                            </th>
+                        </tr>
+                    {/if}
+                {/each}
+            {/await}
         </tbody>
     </table>
     <a href="/" style="margin-top: 20px; justify-self: end">
