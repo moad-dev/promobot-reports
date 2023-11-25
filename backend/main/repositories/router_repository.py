@@ -29,7 +29,6 @@ class RouterRepository:
                         uuid=row['uuid'],
                         group=row['group'],
                         topic=row['topic'],
-                        is_trash=row['is_trash'],
                         address_query=address_query,
                         agency=row['agency']
                     )
@@ -41,13 +40,12 @@ class RouterRepository:
         await self.connection.execute('delete from rules')
 
         await self.connection.executemany(
-            'insert into rules values (?, ?, ?, ?, ?, ?)',
+            'insert into rules values (?, ?, ?, ?, ?)',
             [
                 (
                     rule.uuid,
                     rule.group,
                     rule.topic,
-                    rule.is_trash,
                     json.dumps({
                         'region': rule.address_query.region,
                         'area': rule.address_query.area,

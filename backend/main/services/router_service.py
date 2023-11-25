@@ -83,7 +83,6 @@ class RouterService:
                 uuid=rule.uuid,
                 group=rule.group,
                 topic=rule.topic,
-                is_trash=rule.is_trash,
                 address=AddressSchema(
                     region=rule.address_query.region,
                     area=rule.address_query.area,
