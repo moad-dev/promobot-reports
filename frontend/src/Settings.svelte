@@ -29,7 +29,9 @@
         const parts =  [];
 
         for (const [key, value] of Object.entries(addr)) {
-            parts.push(value);
+            if (value) {
+                parts.push(value);
+            }
         }
         
         result = parts.join(", ");
