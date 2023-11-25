@@ -22,6 +22,24 @@
                 })
         });
     }
+
+    function addrToString(addrs) {
+        let result = "";
+
+        for (const addr of addrs) {
+            const parts =  [];
+
+
+            for (const [key, value] of Object.entries(addr)) {
+                parts.push(value);
+            }
+            
+            result += parts.join(", ");
+        }
+
+        return result;
+    }
+
 </script>
 
 <div style="display: grid; justify-content: center">
@@ -54,13 +72,7 @@
                             {rule["topic"]}
                         </th>
                         <th>
-                            {
-                                rule["address"]["region"] +
-                                rule["address"]["area"] +
-                                rule["address"]["settlement"] +
-                                rule["address"]["street"] +
-                                rule["address"]["building"] || "—"
-                            }
+                            {addrToString(rule["address"])}
                         </th>
                         <th>
                             {rule["agency"]}

@@ -11,11 +11,11 @@
 
             for (const [key, value] of Object.entries(addr)) {
                 if (key !== "region" && value.length !== 0) {
-                    parts.push(value);
+                    parts.push(value.join(", "));
                 }
             }
             
-            result += parts.join(", ") + ";";
+            result += parts.join("; ");
         }
 
         return result;
