@@ -28,9 +28,7 @@ async def add_rule(
     uow=Depends(get_unit_of_work)
 ):
     async with uow: # should be in service layer
-        uuid = await router_service.add_rule(rule_data)
-    
-    return { "uuid": uuid }  
+        await router_service.add_rule(rule_data)
 
 
 @router.delete("/api/rules/{uuid}", status_code=status.HTTP_204_NO_CONTENT)
@@ -68,7 +66,8 @@ async def add_processed_message(
     message_data: MessagePost,
     router_service: Annotated[RouterService, Depends(get_router_service)],
     uow=Depends(get_unit_of_work)
-):
+) -> str:
     async with uow: # should be in service layer
-        await router_service.route(message_data)
+        uuid = await router_service.route(message_data)
     
+    return uuid 

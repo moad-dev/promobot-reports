@@ -25,15 +25,17 @@ class RouterService:
         self.router_repository = router_repository
         self.processed_message_repository = processed_message_repository
 
-    async def route(self, message_post: MessagePost):
+    async def route(self, message_post: MessagePost) -> str:
         router = await self.router_repository.get()
 
         processed_message: ProcessedMessage = router.route(Message(message_post.text))
 
         await self.processed_message_repository.save(processed_message)
 
+        return processed_message.uuid
 
-    async def add_rule(self, rule: RuleCreation) -> str:
+
+    async def add_rule(self, rule: RuleCreation):
         router = await self.router_repository.get()
 
         if rule.address:
@@ -59,8 +61,6 @@ class RouterService:
         router.rules.append(new_rule)
 
         await self.router_repository.save(router)
-        
-        return new_rule.uuid
    
 
     async def get_rules(self) -> list[RuleGet]:
