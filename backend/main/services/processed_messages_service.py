@@ -51,17 +51,15 @@ class ProcessedMessagesService:
                         building=address.building
                     )
                 )
-
-             
-                results.append(
-                    ProcessedMessageGet(
-                        uuid=item.uuid,
-                        text=item.text,
-                        group=item.group,
-                        topic=item.topic,
-                        address=addresses,
-                        agency=item.agencies
-                    )
+            results.append(
+                ProcessedMessageGet(
+                    uuid=item.uuid,
+                    text=item.text,
+                    group=item.group,
+                    topic=item.topic,
+                    address=addresses,
+                    agency=item.agencies
                 )
+            )
 
         return results
