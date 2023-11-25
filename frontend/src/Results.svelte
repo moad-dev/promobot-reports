@@ -51,14 +51,7 @@
                                 {report["topic"]}
                             </th>
                             <th>
-                                {
-                                    report["address"]["region"]
-                                    + (report["address"]["area"] && report["address"]["area"].join(", "))
-                                    + (report["address"]["city"] && report["address"]["city"].join(", "))
-                                    + (report["address"]["street"] && report["address"]["street"].join(", "))
-                                    + (report["address"]["house"] && report["address"]["house"].join(", "))
-                                    || "Не найден"
-                                }
+                                <!-- address -->
                             </th>
                             <th>
                                 {report["agency"]}

@@ -45,7 +45,7 @@
                         <p>{predict["topic"]}</p>
                     </th>
                     <th>
-                        <p>{predict["address"]}</p>
+                        <!-- address -->
                     </th>
                     <th>
                         <p>{predict["agency"]}</p>
