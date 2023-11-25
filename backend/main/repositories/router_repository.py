@@ -37,24 +37,30 @@ class RouterRepository:
             return Router(rules=rules)
         
     async def save(self, router: Router):
-        await self.connection.execute('delete from rules')
+        queries = []
 
+        for rule in router.rules:
+            if rule.address_query:
+                address_query = json.dumps({
+                    'region': rule.address_query.region,
+                    'area': rule.address_query.area,
+                    'settlement': rule.address_query.settlement,
+                    'street': rule.address_query.street,
+                    'building': rule.address_query.building
+                })
+            else:
+                address_query = None
+            
+            queries.append((
+                rule.uuid,
+                rule.group,
+                rule.topic,
+                address_query,
+                rule.agency
+            ))
+
+        await self.connection.execute('delete from rules')
         await self.connection.executemany(
             'insert into rules values (?, ?, ?, ?, ?)',
-            [
-                (
-                    rule.uuid,
-                    rule.group,
-                    rule.topic,
-                    json.dumps({
-                        'region': rule.address_query.region,
-                        'area': rule.address_query.area,
-                        'settlement': rule.address_query.settlement,
-                        'street': rule.address_query.street,
-                        'building': rule.address_query.building
-                    }),
-                    rule.agency
-                )
-                for rule in router.rules
-            ]
+            queries
         )
