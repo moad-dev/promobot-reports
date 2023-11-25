@@ -6,10 +6,10 @@
         address: '',
         agency: '',
     };
-    let rules = fetch('http://localhost:8000/api/rules').then(response => response.json());
+    let rules = fetch(API_URL+'/api/rules').then(response => response.json());
     function deleteRule(rule) {
         console.log(rule["uuid"])
-        fetch('http://localhost:8000/api/rules' + rule["uuid"], {
+        fetch(API_URL+'/api/rules' + rule["uuid"], {
             method:  'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -95,7 +95,7 @@
     <div style="margin-top: 20px">
         <a href="/">
             <button style="background: rgb(22,133,0)" on:click={() => {
-                fetch('http://localhost:8000/api/rules', {
+                fetch(API_URL+'/api/rules', {
                     method:  'POST',
                     headers: {
                       'Content-Type': 'application/json'

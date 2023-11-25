@@ -9,6 +9,8 @@ origins = [
     settings.frontend_url
 ]
 
+print(origins)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
