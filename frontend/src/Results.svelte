@@ -38,7 +38,7 @@
                     {#if !withoutThrashed}
                         <tr>
                             <th>
-                                <button on:click={() => {document.getElementById("modal" + report['uuid']).showModal()}} style="background: none; border: none; color: #535bf2">Показать текст</button>
+                                <button on:click={() => {document.getElementById("modal-" + report['uuid']).showModal()}} style="background: none; border: none; color: #535bf2">Показать текст</button>
                                 <dialog id="modal-{report['uuid']}">
                                     <p>{report["text"]}</p>
                                     <button on:click={() => {document.getElementById("modal-" + report['uuid']).close()}}>Закрыть</button>
