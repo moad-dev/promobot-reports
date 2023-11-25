@@ -8,10 +8,12 @@
     };
     let rules = fetch(API_URL+'/api/rules').then(response => response.json());
     let groups_json = fetch(API_URL+'/groups').then(response => response.json());
-    function deleteRule(rule) {
-        console.log(rule["uuid"])
-        fetch(API_URL+'/api/rules' + rule["uuid"], {
-            method:  'DELETE',
+    async function deleteRule(rule) {
+        let rules = fetch(API_URL + '/api/rules').then(response => response.json());
+        let rules_list = await rules.then(result => result);
+        console.log(rules_list.slice(-1)[0]["uuid"]);
+        fetch(API_URL + '/api/rules/' + rules_list.slice(-1)[0]["uuid"], {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -19,8 +21,7 @@
                 JSON.stringify({
                     uuid: rule["uuid"]
                 })
-        }).then(response => response.json())
-            .then(result => console.log(result));
+        });
     }
 </script>
 
