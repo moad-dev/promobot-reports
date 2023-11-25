@@ -7,6 +7,7 @@
         agency: '',
     };
     let rules = fetch(API_URL+'/api/rules').then(response => response.json());
+    let groups_json = fetch(API_URL+'/groups').then(response => response.json());
     function deleteRule(rule) {
         console.log(rule["uuid"])
         fetch(API_URL+'/api/rules' + rule["uuid"], {
@@ -67,28 +68,32 @@
                     </tr>
                 {/each}
             {/await}
-            <tr>
-                <th>
-                    <select bind:value={rule.group}>
-                        <option value="1">Группа 1</option>
-                        <option value="2">Группа 2</option>
-                        <option value="3">Группа 3</option>
-                    </select>
-                </th>
-                <th>
-                    <select bind:value={rule.topic}>
-                        <option value="1">Тема 1</option>
-                        <option value="2">Тема 2</option>
-                        <option value="3">Тема 3</option>
-                    </select>
-                </th>
-                <th>
-                    <input type="text" bind:value={rule.address}>
-                </th>
-                <th>
-                    <input type="text" bind:value={rule.agency}>
-                </th>
-            </tr>
+            {#await groups_json then groups_dict}
+                <tr>
+                    <th>
+                        <select bind:value={rule.group}>
+                            {#each Object.keys(groups_dict) as key}
+                                <option>{key}</option>
+                            {/each}
+                        </select>
+                    </th>
+                    <th>
+                        <select bind:value={rule.topic}>
+                            {#if rule.group !== ''}
+                                {#each groups_dict[rule.group] as item}
+                                    <option>{item}</option>
+                                {/each}
+                            {/if}
+                        </select>
+                    </th>
+                    <th>
+                        <input type="text" bind:value={rule.address}>
+                    </th>
+                    <th>
+                        <input type="text" bind:value={rule.agency}>
+                    </th>
+                </tr>
+            {/await}
         </tbody>
     </table>
 
