@@ -14,7 +14,7 @@ class RouterRepository:
         async with self.connection.execute('select * from rules') as cursor:
             rules: list[Rule] = []
             async for row in cursor:
-                address_query = json.loads(row['address_query'])
+                address_query = json.loads(row['address'])
                 
                 address_query = AddressQuery(
                     region=address_query['region'],

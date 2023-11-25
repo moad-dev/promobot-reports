@@ -8,7 +8,7 @@ create table if not exists rules (
     uuid text primary key,
     `group` text,
     topic text,
-    addresses text,
+    address text,
     agencies text
 );
 
