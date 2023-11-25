@@ -49,7 +49,7 @@ async def get_all_processed_messages(
     processed_messages = await processed_messages_service.get_processed_messages()
     return processed_messages
 
-@router.get("/api/processed_messages/{uuid}")
+@router.get("/api/processed-messages/{uuid}")
 async def get_processed_message_by_uuid(
     uuid: str,
     processed_messages_service: Annotated[
